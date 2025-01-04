@@ -1,0 +1,13 @@
+.action{
+    background-color: white !important;
+}
+
+.device-table{
+    margin-top: 10px !important;
+}
+
+.table-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

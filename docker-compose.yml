@@ -1,0 +1,172 @@
+services:
+  db-monitoring:
+    image: postgres
+    container_name: db_monitoring
+    environment:
+      POSTGRES_DB: SD_MONITORING
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - db-monitoring-data:/var/lib/postgresql/data
+    ports:
+      - "5435:5432"
+    networks:
+      sd_net:
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    hostname: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    user: 0:0
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+    networks:
+      sd_net:
+
+  reverse_proxy:
+    image: traefik:v2.2
+    container_name: traefik
+    command:
+      - --api.insecure=true
+      - --providers.docker
+      - --accesslog=true
+      - --accesslog.filepath=/var/log/traefik/access.log
+      - --log.level=DEBUG
+      - --entrypoints.web.address=:80
+    ports:
+        - "80:80"
+        - "8080:8080"
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+        - traefik_logs:/var/log/traefik
+    networks:
+        - sd_net
+  db-device:
+    image: postgres
+    container_name: db_device
+    environment:
+      POSTGRES_DB: SD_DEVICES
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - db-device-data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+    networks:
+      sd_net:
+  db-user:
+    image: postgres
+    container_name: db_user
+    environment:
+      POSTGRES_DB: SD_USERS
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    volumes:
+      - db-user-data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    networks:
+      sd_net:
+
+  user-service:
+    image: user-service
+    build:
+      context: ./
+      dockerfile: ./user-service/Dockerfile
+    deploy:
+        replicas: 1
+    labels:
+        - "traefik.enable=true"
+        - "traefik.http.routers.user-service.rule=Host(`user.service.localhost`)"
+        - "traefik.http.services.user-service.loadbalancer.server.port=8081"
+    environment:
+        SPRING_DATASOURCE_URL: jdbc:postgresql://db-user:5432/SD_USERS
+    depends_on:
+      - db-user
+    networks:
+      sd_net:
+
+  device-service:
+    image: device-service
+    build:
+      context: ./
+      dockerfile: ./device-service/Dockerfile
+    deploy:
+        replicas: 1
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.device-service.rule=Host(`device.service.localhost`)"
+      - "traefik.http.services.device-service.loadbalancer.server.port=8082"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-device:5432/SD_DEVICES
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+    depends_on:
+      - db-device
+    networks:
+      sd_net:
+
+  monitoring-service:
+    image: monitoring-service
+    build:
+      context: ./
+      dockerfile: ./monitoring-service/Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.monitoring-service.rule=Host(`monitoring.service.localhost`)"
+      - "traefik.http.services.monitoring-service.loadbalancer.server.port=8083"
+    deploy:
+      replicas: 1
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+      SPRING_RABBITMQ_PORT: 5672
+      SPRING_RABBITMQ_USERNAME: guest
+      SPRING_RABBITMQ_PASSWORD: guest
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db-monitoring:5432/SD_MONITORING
+    depends_on:
+      - db-monitoring
+      - rabbitmq
+    networks:
+      - sd_net
+
+  chat-service:
+    image: chat-service
+    build:
+      context: ./
+      dockerfile: ./chat-service/Dockerfile
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.chat-service.rule=Host(`chat.service.localhost`)"
+      - "traefik.http.services.chat-service.loadbalancer.server.port=8084"
+    deploy:
+      replicas: 1
+    networks:
+      - sd_net
+    
+    
+  react:
+    build:
+      context: ./
+      dockerfile: ./frontend/Dockerfile
+    ports:
+       - "3000:3000"
+    environment:
+      - BACKEND=172.30.0.2
+    networks:
+      - sd_net
+
+volumes:
+  db-user-data:
+  db-device-data:
+  db-monitoring-data:
+  traefik_logs:
+  rabbitmq_data:
+
+networks:
+  sd_net:
+    external: true
+

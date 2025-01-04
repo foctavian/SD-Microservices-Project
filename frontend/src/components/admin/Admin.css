@@ -1,0 +1,207 @@
+body {
+    background-color: #272343;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.header-container {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid #d3d3d3;
+  justify-content: space-between;
+  width:90vw;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f5f5f5; 
+  border-bottom: 1px solid #ccc; 
+  margin-left:75px;
+  position: fixed; 
+  top: 0;
+  left: 0;
+  z-index: 1000; 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); 
+
+}
+
+.admin-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+}
+
+.logout-button {
+  padding: 8px 16px;
+  background-color: #ff6584;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.chat-button{
+  padding: 8px 16px;
+  background-color: 	#0096FF;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right:10px;
+
+}
+
+.graph-button{
+  padding: 8px 16px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right:10px;
+}
+
+.logout-button:hover {
+  background-color: #e05670;
+}
+
+/* Bubble in its collapsed state */
+.sidepanel {
+  width: 60px;
+  height: 60px;
+  position: fixed;
+  left: 20px; 
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ff6584;
+  border-radius: 50%; 
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: width 0.3s ease, height 0.3s ease; 
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.sidepanel:hover {
+  width: 250px; 
+  height: auto; 
+  border-radius: 0; 
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  border-radius:5px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+
+.bubble {
+  font-size: 24px;
+  color: white;
+  pointer-events: none;
+}
+
+
+.sidepanel:hover .bubble {
+  display: none;
+}
+
+
+.admin-container {
+  display: none; 
+  flex-direction: column;
+  gap: 15px; 
+}
+
+.sidepanel:hover .admin-container {
+  display: flex; 
+}
+
+.admin-button {
+  padding: 12px;
+  background-color: #ff6584;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: left;
+  opacity: 0; 
+  transition: opacity 0.3s ease; 
+}
+
+.sidepanel:hover .admin-button {
+  opacity: 1; 
+}
+
+.admin-button:hover {
+  background-color: #e05670;
+}
+
+
+.main-content {
+  margin-left: 80px;
+  padding: 20px;
+}
+
+.sidepanel:hover ~ .main-content {
+  margin-left: 270px; 
+}
+
+.data-container{
+  margin-left:20%;
+  margin-top:20%;
+}
+
+.hoverable-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+.hoverable-button {
+  padding: 10px 20px;
+  background-color: #4285F4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.hoverable-button:hover {
+  background-color: #357AE8;
+}
+
+.hoverable-list {
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  list-style-type: none;
+  padding: 10px;
+  margin-top: 10px;
+  max-height: 200px;
+  width: 200px;
+  overflow-y: auto;
+  position: absolute;
+  bottom: 40px;
+  right: 0;
+}
+
+.hoverable-list li {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.hoverable-list li:hover {
+  background-color: #f0f0f0;
+}

@@ -1,0 +1,33 @@
+2024-10-13T23:49:25.962+03:00  INFO 88504 --- [UserApplication] [main] c.e.user_service.UserServiceApplication  : Starting UserServiceApplication using Java 21.0.4 with PID 88504 (/home/tavif/IdeaProjects/microservices-new/user-service/target/classes started by tavif in /home/tavif/IdeaProjects/microservices-new)
+2024-10-13T23:49:25.965+03:00 DEBUG 88504 --- [UserApplication] [main] c.e.user_service.UserServiceApplication  : Running with Spring Boot v3.3.4, Spring v6.1.13
+2024-10-13T23:49:25.966+03:00  INFO 88504 --- [UserApplication] [main] c.e.user_service.UserServiceApplication  : No active profile set, falling back to 1 default profile: "default"
+2024-10-13T23:49:27.550+03:00  INFO 88504 --- [UserApplication] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-10-13T23:49:27.628+03:00  INFO 88504 --- [UserApplication] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 70 ms. Found 1 JPA repository interface.
+2024-10-13T23:49:28.683+03:00  INFO 88504 --- [UserApplication] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2024-10-13T23:49:28.720+03:00  INFO 88504 --- [UserApplication] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-10-13T23:49:28.721+03:00  INFO 88504 --- [UserApplication] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.30]
+2024-10-13T23:49:28.820+03:00  INFO 88504 --- [UserApplication] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-10-13T23:49:28.820+03:00  INFO 88504 --- [UserApplication] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 2724 ms
+2024-10-13T23:49:29.502+03:00  INFO 88504 --- [UserApplication] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-10-13T23:49:29.674+03:00  INFO 88504 --- [UserApplication] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.5.3.Final
+2024-10-13T23:49:29.771+03:00  INFO 88504 --- [UserApplication] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2024-10-13T23:49:30.309+03:00  INFO 88504 --- [UserApplication] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-10-13T23:49:30.363+03:00  INFO 88504 --- [UserApplication] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-10-13T23:49:30.516+03:00  INFO 88504 --- [UserApplication] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1f7e52d1
+2024-10-13T23:49:30.522+03:00  INFO 88504 --- [UserApplication] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-10-13T23:49:30.583+03:00  WARN 88504 --- [UserApplication] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-10-13T23:49:31.843+03:00  INFO 88504 --- [UserApplication] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-10-13T23:49:31.912+03:00  INFO 88504 --- [UserApplication] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-10-13T23:49:32.659+03:00 DEBUG 88504 --- [UserApplication] [main] c.e.user_service.config.com.example.user_service.config.JwtTokenFilter   : Filter 'jwtTokenFilter' configured for use
+2024-10-13T23:49:32.802+03:00  INFO 88504 --- [UserApplication] [main] eAuthenticationProviderManagerConfigurer : Global AuthenticationManager configured with AuthenticationProvider bean with name authenticationProvider
+2024-10-13T23:49:32.805+03:00  WARN 88504 --- [UserApplication] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with an AuthenticationProvider bean. UserDetailsService beans will not be used for username/password login. Consider removing the AuthenticationProvider bean. Alternatively, consider using the UserDetailsService in a manually instantiated DaoAuthenticationProvider.
+2024-10-13T23:49:33.165+03:00  WARN 88504 --- [UserApplication] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-10-13T23:49:34.114+03:00  INFO 88504 --- [UserApplication] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path '/'
+2024-10-13T23:49:34.126+03:00  INFO 88504 --- [UserApplication] [main] c.e.user_service.UserServiceApplication  : Started UserServiceApplication in 9.3 seconds (process running for 10.059)
+2024-10-13T23:49:42.826+03:00  INFO 88504 --- [UserApplication] [http-nio-8081-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-10-13T23:49:42.826+03:00  INFO 88504 --- [UserApplication] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-10-13T23:49:42.827+03:00  INFO 88504 --- [UserApplication] [http-nio-8081-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2024-10-13T23:49:42.891+03:00  INFO 88504 --- [UserApplication] [http-nio-8081-exec-1] c.e.u.c.AuthenticationController         : Received request to create user: null and p : null
+2024-10-13T23:53:00.838+03:00  INFO 88504 --- [UserApplication] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-10-13T23:53:00.844+03:00  INFO 88504 --- [UserApplication] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-10-13T23:53:00.860+03:00  INFO 88504 --- [UserApplication] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
